@@ -1,0 +1,18 @@
+.btnCarrito {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btnCarrito:hover {
+    background-color: #0b5ed7;
+  }

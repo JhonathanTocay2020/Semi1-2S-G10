@@ -18,10 +18,10 @@ function Navigation() {
   
       if (userName == null) {
         return(
-            <Navbar bg="primary" variant='dark' expand="lg">
+            <Navbar bg="dark" variant='dark' expand="lg">
             <Container>
                 <Navbar.Brand href="/home">
-                    <i className="bi bi-person-badge-fill"></i>
+                    <i className="bi bi-twitter"></i>
                     SemiSocial
                 </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -38,10 +38,10 @@ function Navigation() {
         )
       }
       return(
-      <Navbar bg="primary" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
               <Navbar.Brand href="/">
-                <i className="bi bi-person-badge-fill"></i>
+                <i className="bi bi-twitter"></i>
                 SemiSocial
               </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

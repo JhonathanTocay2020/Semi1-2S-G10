@@ -186,7 +186,7 @@ function Registro() {
         {showStream?(<video ref={videoRef} src={imgData} style={{height:'auto',width:'55%', marginTop:20}}></video>):(<p></p>)}
                     {stream ? (                        
                         <div>
-                            <button className="btn btn-primary" onClick={handleCapture}>
+                            <button className="btn btn-dark" onClick={handleCapture}>
                                 Tomar Foto
                             </button>                                                           
                         </div>                
@@ -199,14 +199,14 @@ function Registro() {
             )}
             <div>
                 {imgData ? (<img className="profile-img-card1" src={imgData} style={{height:100}} />) 
-                         : (<img className="profile-img-card1" src={'add.png'}/>)}                                    
+                         : (<img className="profile-img-card1" src={'Agregar.png'}/>)}                                    
             </div>
             <p className="h5">Foto de perfil Inicial:</p>
             <div>
                 {stream ? (
                     <div></div>
                 ) : (
-                    <button style={{marginBottom:10}} onClick={handleStartCamera} className="btn btn-secondary">Encender Cam</button>
+                    <button style={{marginBottom:10, width: '100%'}} onClick={handleStartCamera} className="btn btn-secondary">Encender Cam</button>
                 )}                                
             </div>               
             <Form.Control style={{marginBottom:30}} 
@@ -236,7 +236,7 @@ function Registro() {
                     <Form.Control type="password" id="inputPassword2" className="form-control" placeholder="Confirmacion de Contraseña" required name='password2'/>
                     <Form.Control.Feedback type="invalid" style={{marginTop:-10,marginBottom:10}} >Por favor confirme su contraseña.</Form.Control.Feedback>
                 </Form.Group>
-                <button className="btn btn-warning btn-block" type="submit">Registrarse</button>
+                <button className="btn btn-dark btn-block" type="submit">Registrarse</button>
             </Form>
             <p>¿Ya tiene cuenta? <a href="/login" className="forgot-password">Iniciar sesion</a></p>
         </div>

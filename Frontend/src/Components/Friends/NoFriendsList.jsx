@@ -84,20 +84,20 @@ function NoFriendsList() {
                     </Alert>
                 )}
                  
-                <h4>Personas que quiza conozcas</h4>
+                <h4 style={{color: 'white'}}>Personas que quiza conozcas</h4>
 
                 <div className="row" style={{marginTop:20}}>
                     {usuariosDesconocidos.length === 0 &&(
                         <Alert variant='info'>¡No hay ninguna persona por agregar!</Alert>
                     )}
                     {usuariosDesconocidos.map((soli,index) => (
-                        <div className="col-sm-6" key={index}>
+                        <div className="col-sm-3" key={index}>
                             <div className="card" style={{marginTop:20}}>
                             <div className="card-body">
                                 <h5 className="card-title">{soli.nombre}</h5>                                
-                                
-                                <a  className="btn btn-info" 
-                                    style={{marginRight:10}} 
+                                <br></br>
+                                <a  className="btn btn-secondary" 
+                                    style={{marginRight:10, width: '100%'}} 
                                     onClick={() => enviarSolicitud(soli.id)}>
                                    <i className="bi bi-person-plus-fill"></i>
                                     Enviar Solicitud

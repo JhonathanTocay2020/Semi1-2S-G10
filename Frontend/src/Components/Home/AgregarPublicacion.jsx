@@ -149,7 +149,7 @@ function AgregarPublicacion() {
                                 <Form.Control.Feedback type="invalid">Por favor ingrese una descripcion.</Form.Control.Feedback>
                             </Form.Group>
                         </Row>                    
-                        <Button type="submit" style={{marginTop:30}}>
+                        <Button type="submit" variant="dark" style={{marginTop:30}}>
                             <i className="bi bi-upload" style={{paddingRight:10}}></i>
                             Publicar
                         </Button>

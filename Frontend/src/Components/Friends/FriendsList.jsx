@@ -44,7 +44,7 @@ function FriendsList() {
     return (
         <div style={{ padding: 20 }}>
 
-            <h4>Amigos</h4>
+            <h4 style={{color: 'white'}}>Amigos</h4>
 
             <div className="row" style={{ marginTop: 20 }}>
                 {usuariosAmigos.length === 0 && (

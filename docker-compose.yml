@@ -12,7 +12,7 @@ services:
         container_name: backend
         build:
             dockerfile: Dockerfile
-            context: ./node-server
+            context: ./APIREST
         ports:
             - 4000:4000
         networks:

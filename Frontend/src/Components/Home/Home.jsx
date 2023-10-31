@@ -14,13 +14,52 @@ function Home() {
   let navigate = useNavigate();
   const [labels, setLabels] = useState([]);
   const [publicaciones, setPublicaciones] = useState([]);
-
+  const [traduccion, setTraduccion] = useState('');
   const [comentarios, setComentarios] = useState([]);
 
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
   const [idComment, setIdComment] = useState(0);
 
   const handleClose = () => setShow(false);
+  const handleClose2 = () => setShow2(false);
+  
+  const handleShowT = (frase) =>{
+    const bod = {
+      text: frase,
+    };
+
+    fetch('https://t6t3fg7do2.execute-api.us-east-2.amazonaws.com/test/mytranslate',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Asegúrate de ajustar el tipo de contenido según tus necesidades
+        },
+        body: JSON.stringify(bod),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`La solicitud falló con estado: ${response.status}`);
+        }
+        return response.json();
+      }).then(data => {
+        console.log('Respuesta exitosa:', data);
+        const Parseado = JSON.parse(data.body);
+        console.log(Parseado)
+        setTraduccion(Parseado.translated_text);
+        setShow2(true);
+        {
+          /*<div>
+            <h2>{Parseado.translated_text}</h2>
+          </div>*/
+        }
+        // Haz algo con la respuesta exitosa
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error.message);
+        // Manejar errores
+      });
+  }
+
   const handleShow = (id) => {
     console.log(id)  
     setIdComment(id)
@@ -35,6 +74,30 @@ function Home() {
     })
     .then((data) => {
       console.log(data.comentarios[0])
+      const bod = {
+        text: data.comentarios[0][0].mensaje,
+      };
+      console.log(bod)
+      fetch('https://t6t3fg7do2.execute-api.us-east-2.amazonaws.com/test/mytranslate',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Asegúrate de ajustar el tipo de contenido según tus necesidades
+        },
+        body: JSON.stringify(bod),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`La solicitud falló con estado: ${response.status}`);
+        }
+        return response.json();
+      }).then(data => {
+        console.log('Respuesta exitosa:', data);
+        // Haz algo con la respuesta exitosa
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error.message);
+        // Manejar errores
+      });
       setComentarios(data.comentarios[0])
     }) 
     .catch((error) => console.error(error.message));
@@ -201,11 +264,14 @@ function Home() {
                 <Card.Body>
                     <Card.Title>{pub.nombre_foto}</Card.Title>
                       <img src={pub.url_foto} className='imgPub'/>
-                      <p  style={{marginTop:10}}>Descripcion: <a>(Traducir)</a></p>
+                      <p  style={{marginTop:10}}>Descripcion:</p>
                     <Card.Text>
                       {pub.descripcion}
                     </Card.Text>
                     <Button style={{width: '100%', backgroundColor: "#212F3C"}} onClick={() => handleShow(pub.id)}>Ver Comentarios...</Button>
+                    <br></br>
+                    <br></br>
+                    <Button style={{width: '100%', backgroundColor: "#212F3C"}} onClick={() => handleShowT(pub.descripcion)}>Traducir...</Button>
                 </Card.Body>
                 </Card>
               </div>
@@ -253,6 +319,20 @@ function Home() {
             </Modal.Footer>
           </Modal>
           <AgregarPublicacion style={{position:'relative',height:'80vh' }}/>   
+
+          <Modal show={show2} onHide={handleClose2} size="xl">
+            <Modal.Header closeButton>
+              <Modal.Title>Traducción</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>{traduccion}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose2}>
+                Cerrar
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
     )
  

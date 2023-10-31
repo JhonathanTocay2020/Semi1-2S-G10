@@ -237,7 +237,7 @@ export const crearComentario = async (req, res) => {
     }
 
     await pool.query(
-      `insert into Comentario values ('${user.id}',${idpublicacion},'${mensaje}');`
+      `insert into Comentario (usuario, publicacion, mensaje)  values ('${user.id}',${idpublicacion},'${mensaje}');`
     );
 
     result.mensaje = "Tu comentario se publico con exito";

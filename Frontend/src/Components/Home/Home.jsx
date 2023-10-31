@@ -47,21 +47,82 @@ function Home() {
         console.log(Parseado)
         setTraduccion(Parseado.translated_text);
         setShow2(true);
-        {
-          /*<div>
-            <h2>{Parseado.translated_text}</h2>
-          </div>*/
-        }
-        // Haz algo con la respuesta exitosa
       })
       .catch(error => {
         console.error('Error al realizar la solicitud:', error.message);
-        // Manejar errores
       });
   }
 
+  const handleShow2 = (id) => {
+    //console.log(id);
+    setComentarios([]);
+    setIdComment(id);
+  
+    console.log(`${config.apiUrl}/get-comentario/${id}`);
+    fetch(`${config.apiUrl}/get-comentario/${id}`, config.requestOptionsGET)
+      .then(response => {
+        if (!response.ok) {
+          console.error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.comentarios[0]);
+        const traducciones = [];
+        
+        // Itera sobre cada comentario en data.comentarios
+        data.comentarios[0].forEach(async (comentario) => {
+          const bod = {
+            text: comentario.mensaje,
+          };
+          console.log(bod);
+  
+          // Realiza la solicitud de traducción para cada comentario
+          try {
+            const traduccionResponse = await fetch('https://t6t3fg7do2.execute-api.us-east-2.amazonaws.com/test/mytranslate', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(bod),
+            });
+  
+            if (!traduccionResponse.ok) {
+              throw new Error(`La solicitud de traducción falló con estado: ${traduccionResponse.status}`);
+            }
+  
+            const traduccionData = await traduccionResponse.json();
+            const Parseado = JSON.parse(traduccionData.body);
+            console.log(Parseado);
+  
+            // Agrega la traducción al array de traducciones
+            traducciones.push({"mensaje": Parseado.translated_text});
+            
+            // Actualiza el estado con las traducciones una vez que todas están completas
+            if (traducciones.length === data.comentarios[0].length) {
+              console.log('Traducciones:', traducciones);
+              setComentarios(traducciones);
+            }
+          } catch (error) {
+            console.error('Error al realizar la solicitud de traducción:', error.message);
+            // Puedes manejar el error de traducción aquí
+            traducciones.push('Error de traducción');
+  
+            // Actualiza el estado con las traducciones una vez que todas están completas
+            if (traducciones.length === data.comentarios[0].length) {
+              console.log('Traducciones:', traducciones);
+              setComentarios(data.comentarios[0]);
+            }
+          }
+        });
+      })
+      .catch((error) => console.error(error.message));
+      setShow(true);
+  };
+
   const handleShow = (id) => {
-    console.log(id)  
+    console.log(id) 
+    setComentarios([]) 
     setIdComment(id)
 
     console.log(`${config.apiUrl}/get-comentario/${id}`)
@@ -74,30 +135,6 @@ function Home() {
     })
     .then((data) => {
       console.log(data.comentarios[0])
-      const bod = {
-        text: data.comentarios[0][0].mensaje,
-      };
-      console.log(bod)
-      fetch('https://t6t3fg7do2.execute-api.us-east-2.amazonaws.com/test/mytranslate',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', // Asegúrate de ajustar el tipo de contenido según tus necesidades
-        },
-        body: JSON.stringify(bod),
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`La solicitud falló con estado: ${response.status}`);
-        }
-        return response.json();
-      }).then(data => {
-        console.log('Respuesta exitosa:', data);
-        // Haz algo con la respuesta exitosa
-      })
-      .catch(error => {
-        console.error('Error al realizar la solicitud:', error.message);
-        // Manejar errores
-      });
       setComentarios(data.comentarios[0])
     }) 
     .catch((error) => console.error(error.message));
@@ -271,6 +308,9 @@ function Home() {
                     <Button style={{width: '100%', backgroundColor: "#212F3C"}} onClick={() => handleShow(pub.id)}>Ver Comentarios...</Button>
                     <br></br>
                     <br></br>
+                    <Button style={{width: '100%', backgroundColor: "#212F3C"}} onClick={() => handleShow2(pub.id)}>Traducir Comentarios</Button>
+                    <br></br>
+                    <br></br>
                     <Button style={{width: '100%', backgroundColor: "#212F3C"}} onClick={() => handleShowT(pub.descripcion)}>Traducir...</Button>
                 </Card.Body>
                 </Card>
@@ -310,9 +350,6 @@ function Home() {
 
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="dark" onClick={handleClose}>
-                Traducir
-              </Button>
               <Button variant="secondary" onClick={handleClose}>
                 Cerrar
               </Button>

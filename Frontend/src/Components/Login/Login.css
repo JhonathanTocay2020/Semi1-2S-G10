@@ -4,6 +4,27 @@
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 }*/
 
+body{
+    background-color: #212F3C;
+}
+
+.boto{
+    background-color: #154360;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #1a5276; /* Cambiar el color en hover */
+}
+
+.centered-title {
+    text-align: center;
+    color: #0B5345;
+    font-size: 2em;
+    margin-top: 20px;
+  }
+
 .card1-container.card1 {
     max-width: 450px;
     padding: 40px 40px;

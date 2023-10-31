@@ -97,7 +97,7 @@ function Confirmation() {
               {alertText}
           </Alert>
         )}
-            <img id="profile-img" className="profile-img-card1" src="add.png" alt=''/>
+            <img id="profile-img" className="profile-img-card1" src="Agregar.png" alt=''/>
             <p id="profile-name" className="profile-name-card1"></p>
             <p className='h6'>Ingrese el codigo de confirmacion que le fue enviado al correo:</p>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="form-signin">

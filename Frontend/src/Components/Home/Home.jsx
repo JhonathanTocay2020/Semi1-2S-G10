@@ -180,7 +180,7 @@ function Home() {
         <>  
         <div style={{padding:20}}>
           <Form.Group>
-              <Form.Label htmlFor="labels">Buscar por etiqueta</Form.Label>
+              <Form.Label htmlFor="labels" style={{ color: 'white', fontSize:"30px"}}>Buscar por etiqueta</Form.Label>
               <Form.Control 
                 list="labels" 
                 id="exampleDataList" 
@@ -196,8 +196,8 @@ function Home() {
               </datalist>
           </Form.Group>
           {publicaciones.map((pub,index) => ( 
-              <div className="row" key={index} style={{padding:'2% 25% 15px 25%'}}>
-                <Card className="border-secondary">
+              <div className="row" key={index} style={{padding:'2% 10% 15px 10%'}}>
+                <Card className="border-secondary" style={{backgroundColor: "#BDC3C7"}}>
                 <Card.Body>
                     <Card.Title>{pub.nombre_foto}</Card.Title>
                       <img src={pub.url_foto} className='imgPub'/>
@@ -205,7 +205,7 @@ function Home() {
                     <Card.Text>
                       {pub.descripcion}
                     </Card.Text>
-                    <Button onClick={() => handleShow(pub.id)}>Ver Comentarios...</Button>
+                    <Button style={{width: '100%', backgroundColor: "#212F3C"}} onClick={() => handleShow(pub.id)}>Ver Comentarios...</Button>
                 </Card.Body>
                 </Card>
               </div>
@@ -237,15 +237,15 @@ function Home() {
                   <Form.Control type="text" className="form-control" placeholder="Agregar Comentario" required name='comentario' id='txtComentario'/>                  
                 </div>
                 <div className="col-auto">
-                  <Button variant="primary" onClick={() => addNewComent({idComment})}>+</Button>
+                  <Button variant="dark" onClick={() => addNewComent({idComment})}>+</Button>
                 </div>
               </div>
               
 
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" onClick={handleClose}>
-                Traducir(ingles/frances/aleman)
+              <Button variant="dark" onClick={handleClose}>
+                Traducir
               </Button>
               <Button variant="secondary" onClick={handleClose}>
                 Cerrar

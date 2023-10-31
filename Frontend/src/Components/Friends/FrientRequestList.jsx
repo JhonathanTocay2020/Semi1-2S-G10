@@ -88,7 +88,7 @@ function FrientRequestList() {
                     </Alert>
                 )}
                  
-                <h4>Personas que quiza conozcas</h4>
+                <h4 style={{color: 'white'}}>Personas que quiza conozcas</h4>
 
                 <div className="row" style={{marginTop:20}}>
                     {usuariosDesconocidos.length === 0 &&(

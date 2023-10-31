@@ -204,25 +204,25 @@ export function EditProfile() {
                 {alertText}
             </Alert>
         )}
-        <div className="col-4">
-            <h3>Foto de Perfil</h3>
-            <img src={image64} alt="Imagen" id='imgFile'/>
+        <div className="col-3">
+            <h3 style={{ color: 'white' }}>Foto de Perfil</h3>
+            <img src={image64} alt="Imagen" id='imgFile' style={{height:'350px'}}/>
 
             <Row className="mb-3">
         <Form noValidate validated={validated2} onSubmit={handleSubmitPhoto}>
           <Form.Group as={Col} md="12" >
           <Row className="mb-3">
-            <Form.Group as={Col} md="12" >
+            <Form.Group as={Col} md="12" style={{ color: 'white' }} >
               <Form.Label>Nombre Imagen de Perfil*</Form.Label>
               <Form.Control type="text" name="NombreFoto" placeholder="Nombre1" id='txtNamePhoto' required/>
               <Form.Control.Feedback tooltip>Todo Bien!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">Por favor ingrese un nombre.</Form.Control.Feedback>
             </Form.Group>
           </Row>
-          <Form.Label>Nueva Imagen (Opcional)</Form.Label>
+          <Form.Label style={{ color: 'white' }}>Nueva Imagen (Opcional)</Form.Label>
             <Form.Control type="file" name="image64" onChange={toBase64} accept="image/jpg, image/jpeg, image/png"/>
           </Form.Group>
-          <Button type="submit" style={{marginTop:15}}>
+          <Button type="submit" variant='secondary' style={{marginTop:15}}>
             <i className="bi bi-pencil-square" style={{paddingRight:10}}></i>
              Editar Foto
           </Button>
@@ -232,7 +232,7 @@ export function EditProfile() {
         <div className="col-6" style={{marginTop:30}}>
         <Form noValidate validated={validated1} onSubmit={handleSubmitName}>
           <Row>                    
-            <Form.Group as={Col} className="position-relative">
+            <Form.Group as={Col} className="position-relative" style={{ color: 'white' }}>
                 <Form.Label>Nombre*</Form.Label>
                 <Form.Control type="text" name="Nombre" placeholder="Nombre1" id='txtName' required/>
                 <Form.Control.Feedback tooltip>Todo Bien!</Form.Control.Feedback>
@@ -241,7 +241,7 @@ export function EditProfile() {
           </Row>      
 
           <Row>                    
-            <Form.Group as={Col} className="position-relative">
+            <Form.Group as={Col} className="position-relative" style={{ color: 'white' }}>
                 <Form.Label>DPI*</Form.Label>
                 <Form.Control type="number" name="Dpi" placeholder="DPI" id='txtDpi' required/>
                 <Form.Control.Feedback tooltip>Todo Bien!</Form.Control.Feedback>
@@ -250,14 +250,14 @@ export function EditProfile() {
           </Row>      
 
           <Row className="mb-3">
-          <Form.Group as={Col} md="12" >
+          <Form.Group as={Col} md="12" style={{ color: 'white' }}>
             <Form.Label>Contraseña*</Form.Label>
             <Form.Control type="password" required name="password" id='txtPass'/>
             <Form.Control.Feedback type="invalid">Por favor ingrese su contraseña.</Form.Control.Feedback>
           </Form.Group>
         </Row>
 
-        <Button type="submit">
+        <Button type="submit" variant='secondary'>
             <i className="bi bi-pencil" style={{paddingRight:10}}></i>
             Editar
         </Button>

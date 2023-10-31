@@ -232,8 +232,8 @@ function Login() {
               </Alert>
             )}
           
-            <img id="profile-img" className="profile-img-card1" src="user.png" alt=''/>
-            <p id="profile-name" className="profile-name-card1"></p>
+            {/*<img id="profile-img" className="profile-img-card1" src="user.png" alt=''/>*/}
+            <h1 id="profile-name" className="centered-title">Login</h1>
 
             <Form noValidate validated={validated} onSubmit={handleSubmitLogin} className="form-signin">
                 <span id="reauth-email" className="reauth-email"></span>
@@ -245,11 +245,11 @@ function Login() {
                   <Form.Control type="password" id="inputPassword" className="form-control" placeholder="Contraseña" required name='Contrasenia'/>
                   <Form.Control.Feedback type="invalid">Por favor ingrese su contraseña.</Form.Control.Feedback>
                 </Form.Group>
-                <button className="btn btn-warning btn-block" type="submit">Iniciar Sesion</button>
+                <button className="btn btn-dark btn-block" type="submit">Iniciar Sesion</button>
                 </Form>
-                <button className="btn btn-info" style={{width:'100%'}} onClick={handleStartCamera}>Ingresar con Camara</button>
+                <button className="btn boto" style={{width:'100%'}} onClick={handleStartCamera}>Ingresar con Camara</button>
                 <div>
-                    <p style={{marginTop:10}}><a className="h5" href="/register">¿Crear cuenta?</a></p>
+                    <p style={{marginTop:10}}><a className="h5" href="/register">¿Desea crear una cuenta?</a></p>
                 </div>
           </div>
         )}

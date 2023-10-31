@@ -1,0 +1,29 @@
+version: '3.1'
+
+networks:
+    semi:
+        name: semi
+        driver: bridge
+
+services:
+    backend:
+        env_file:
+            - .env
+        container_name: backend
+        build:
+            dockerfile: Dockerfile
+            context: ./node-server
+        ports:
+            - 4000:4000
+        networks:
+            - semi
+
+    frontend:
+        container_name: frontend
+        build:
+            dockerfile: Dockerfile
+            context: ./Frontend
+        ports:
+            - 80:80
+        networks:
+            - semi

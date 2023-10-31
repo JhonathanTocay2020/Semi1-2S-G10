@@ -21,8 +21,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 //bodyparser
-app.use(bodyParser.json({ limit: "1000mb", extended: true }));
-app.use(bodyParser.text({ limit: "1000mb" }));
+
 
 // Routes
 app.use("/", indexRoutes);

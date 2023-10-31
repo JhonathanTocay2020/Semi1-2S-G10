@@ -1,9 +1,15 @@
 import aws from 'aws-sdk';
+import { createHmac } from 'crypto';
 import AmazonCognitoIdentity  from "amazon-cognito-identity-js";
 import {configCognito, APP_CLIENT_ID, USER_POOL} from "../config/configCog.js"
 
 export const registrarCognito = async (email, password) => {
     aws.config.update(configCognito);
+
+    const hasher = createHmac('sha256', '1ibnmpplutobhj8n8pg2iivfhej22emv6pkgmvbhobj2r4cpaa23');
+  // AWS wants `"Username" + "Client Id"`
+    hasher.update(`${email}${APP_CLIENT_ID}`);
+    const secretHash = hasher.digest('base64');
 
     const cognito = new aws.CognitoIdentityServiceProvider({
         apiVersion: '2016-04-19', 
@@ -13,7 +19,8 @@ export const registrarCognito = async (email, password) => {
     const params = {
         ClientId: APP_CLIENT_ID,
         Username: email,
-        Password: password
+        Password: password,
+        SecretHash: secretHash
       };
 
       try {

@@ -18,8 +18,11 @@ export const listadoDesconocidos = async (req, res) => {
         }
 
         const [Select] = await pool.query(
-            `select usr.id, usr.nombre from Usuario usr inner join Amigo A on not (usr.id = A.usuario1 or usr.id = A.usuario2)
-            where not usr.id =  '${user.id}';`);
+            `SELECT U.id, U.nombre
+            FROM Usuario U
+            LEFT JOIN Amigo A ON (U.id = A.usuario1 OR U.id = A.usuario2)
+            AND (A.usuario1 = '${user.id}' OR A.usuario2 = '${user.id}')
+            WHERE A.id IS NULL and not U.id = '${user.id}';`);
 
         result.mensaje = "Usuarios obtenidos correctamente"
         result.usuarios = Select
@@ -217,8 +220,11 @@ export const listadoAmigos = async (req, res) => {
         }
 
         const [Select] = await pool.query(
-            `select usr.id, usr.nombre from Usuario usr inner join Amigo A on usr.id = A.usuario1 or usr.id = A.usuario2
-            where not usr.id =  '${user.id}';`);
+            `select usr.id, usr.nombre from Usuario usr inner join
+            (select usuario2 as idAmigo from Amigo where usuario1='${user.id}' and estado=1
+            union all
+            select usuario1 as idAmigo from Amigo where usuario2='${user.id}' and estado=1)
+            as tablaAmigo on usr.id = tablaAmigo.idAmigo;`);
 
         result.mensaje = "Usuarios obtenidos correctamente"
         result.usuarios = Select

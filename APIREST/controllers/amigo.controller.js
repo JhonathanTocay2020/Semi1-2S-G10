@@ -201,3 +201,35 @@ export const getPublicacionAmigo = async (req, res) =>{
         return res.status(500).json(result);
     }
 }
+
+// Listar todos aquellos usuarios que son amigos
+export const listadoAmigos = async (req, res) => {
+    let result = {
+        mensaje: "",
+        usuarios: []
+    }
+
+    try{
+        //Verificar token
+        const user = await validarToken(req.headers["access-token"]);
+        if (user == null){
+            result.mensaje = "Acceso Denegado"
+            return res.status(401).json(result)
+        }
+
+        const [Select] = await pool.query(
+            `SELECT usr.id, usr.nombre FROM Usuario usr
+            WHERE (SELECT Count(*) FROM Amigo am WHERE am.usuario1 = usr.id OR usuario2 = usr.id) > 0
+            AND NOT usr.id = '${user.id}';`);
+
+        result.mensaje = "Usuarios obtenidos correctamente"
+        result.usuarios = Select
+        return res.status(200).json(result);
+    }
+    catch (error) {//Error si algo sale mal
+        console.log(error)
+        result.mensaje = "Algo ha salido mal"
+        return res.status(500).json(result);
+    }
+}
+

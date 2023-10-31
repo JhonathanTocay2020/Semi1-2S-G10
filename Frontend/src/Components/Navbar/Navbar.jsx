@@ -63,6 +63,10 @@ function Navigation() {
                       <i className="bi bi-people-fill"></i>
                       Ver Solicitudes
                   </Nav.Link>
+                  <Nav.Link href="/friendsList">
+                      <i className="bi bi-people-fill"></i>
+                      Ver Amigos
+                  </Nav.Link>
                   
               </Nav>
                 <Navbar.Brand>

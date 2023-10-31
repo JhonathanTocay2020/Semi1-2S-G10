@@ -12,6 +12,7 @@ import EditProfile from './Components/EditProfile/EditProfile';
 import NoFriendsList from './Components/Friends/NoFriendsList';
 import FrientRequestList from './Components/Friends/FrientRequestList';
 import Chatbot from './Components/Chatbot/Chatbot';
+import FriendsList from './Components/Friends/FriendsList';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/noFriendsList" element={<NoFriendsList/>} />
         <Route path="/requests" element={<FrientRequestList/>} />
         <Route path="/" element={<Home/>} />
-        <Route path="/Chatbot" element={<Chatbot/>} />
+        <Route path="/friendsList" element={<FriendsList/>} />
 
       </Routes>
     </div>

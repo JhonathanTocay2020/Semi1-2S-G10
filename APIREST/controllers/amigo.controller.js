@@ -219,7 +219,7 @@ export const listadoAmigos = async (req, res) => {
 
         const [Select] = await pool.query(
             `select usr.id, usr.nombre from Usuario usr inner join Amigo A on usr.id = A.usuario1 or usr.id = A.usuario2
-            where usr.id =  '${user.id}';`);
+            where not usr.id =  '${user.id}';`);
 
         result.mensaje = "Usuarios obtenidos correctamente"
         result.usuarios = Select

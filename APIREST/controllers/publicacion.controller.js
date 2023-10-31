@@ -128,7 +128,7 @@ export const getPublicacionesTodas = async (req, res) => {
 
     const [Select] = await pool.query(
       `SELECT id, nombre_foto, url_foto, descripcion
-            FROM Publicacion Where usuario = '${user.id}'`
+            FROM Publicacion'`
     );
 
     const publicaciones = Select.map((item) => {
@@ -165,8 +165,7 @@ export const getEtiquetas = async (req, res) => {
     const [Select] = await pool.query(
       `Select distinct(Etiqueta.id), nombre from Etiqueta
             Inner Join Publicacion_Etiqueta on Publicacion_Etiqueta.etiqueta = Etiqueta.id
-            Inner Join Publicacion on Publicacion.id = Publicacion_Etiqueta.publicacion
-            Where Publicacion.usuario = '${user.id}'`
+            Inner Join Publicacion on Publicacion.id = Publicacion_Etiqueta.publicacion'`
     );
 
     result.mensaje = "Etiquetas obtenidas correctamente";
